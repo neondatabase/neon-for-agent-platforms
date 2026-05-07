@@ -10,12 +10,6 @@ Official Neon docs: [Agent Plan](https://neon.com/docs/introduction/agent-plan),
 
 ## Clone and run
 
-Sources: [`examples/api-scripts/scripts/`](examples/api-scripts/scripts/) (TypeScript). **`npm run build`** runs **`tsc`**; output is under **`dist/scripts/`**. Each **`npm run …`** in [`examples/api-scripts/package.json`](examples/api-scripts/package.json) runs **`build`** then **`node`** on that output (no `tsx`). Scripts use **`import "dotenv/config"`** so a **`.env`** loads automatically.
-
-**Neon TypeScript SDK** in this repository means **[`@neondatabase/api-client`](https://www.npmjs.com/package/@neondatabase/api-client)** only (Neon Management API), not other Neon npm packages.
-
-Script names, env vars, and full command list: **[examples/api-scripts/MANAGEMENT_API_SAMPLES.md](examples/api-scripts/MANAGEMENT_API_SAMPLES.md)**.
-
 ```bash
 git clone https://github.com/neondatabase/neon-for-agent-platforms.git
 cd neon-for-agent-platforms/examples/api-scripts
