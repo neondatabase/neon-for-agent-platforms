@@ -1,0 +1,24 @@
+{
+  "name": "neon-for-agent-platforms",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Neon Agent Program examples and companion Agent Skill",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neondatabase/neon-for-agent-platforms"
+  },
+  "keywords": ["neon", "postgres", "agent-skills", "ai-agents"],
+  "type": "module",
+  "scripts": {
+    "fmt": "prettier --write \"examples/api-scripts/scripts/**/*.ts\"",
+    "fmt:check": "prettier --check \"examples/api-scripts/scripts/**/*.ts\"",
+    "typecheck": "tsc --project examples/tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "@neondatabase/api-client": "^2.7.1",
+    "@types/node": "^25.6.0",
+    "prettier": "^3.4.2",
+    "typescript": "^6.0.3"
+  }
+}
