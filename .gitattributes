@@ -1,9 +1,0 @@
-# Count runnable TypeScript API examples in GitHub language stats.
-examples/api-scripts/scripts/**/*.ts linguist-detectable=true
-examples/api-scripts/scripts/**/*.ts -linguist-documentation
-examples/api-scripts/scripts/**/*.ts -linguist-vendored
-examples/api-scripts/scripts/**/*.ts -linguist-generated
-examples/api-scripts/scripts/**/*.ts linguist-language=TypeScript
-
-# Do not count compiled output if dist is ever committed.
-examples/api-scripts/dist/** linguist-generated=true
