@@ -3,8 +3,8 @@
 name: neon-postgres-agent-platforms
 description: >-
   Multi-tenant AI agent platforms on Neon: provisioning many projects/databases
-  per user, dual orgs (sponsored free + paid), org vs personal API keys, project
-  transfer, fleet provisioning, compound checkpoints (DB + revision + secrets +
+  per user, dual orgs (sponsored free + paid), personal vs organization vs
+  project-scoped API keys, project transfer, fleet provisioning, compound checkpoints (DB + revision + secrets +
   deploy metadata), snapshot/restore orchestration for tenants, consumption v2,
   cost isolation, Agent Plan rates, co-marketing, support, and
   neondatabase/neon-for-agent-platforms examples. Required companion to
@@ -30,7 +30,7 @@ API, and MCP, use `**neon-postgres**` and [Neon docs](https://neon.com/docs).
 Use `**neon-postgres**` for general Neon usage. Use **this skill** when the
 question involves:
 
-- Dual-org economics and API keys
+- Dual-org economics and API keys (personal, organization, project-scoped)
 - Project-per-tenant provisioning and transfer
 - Fleet-wide snapshot/restore orchestration and housekeeping
 - Compound checkpoints
@@ -70,13 +70,21 @@ revision + Neon snapshot/branch + secrets/env version + deploy URL + agent
 metadata. Do not equate "checkpoint" with "Neon branch" alone. See the
 [compound checkpoints doc](https://github.com/neondatabase/neon-for-agent-platforms/blob/main/skills/neon-postgres-agent-platforms/references/COMPOUND_CHECKPOINTS_FOR_AGENT_PLATFORMS.md).
 - **Cross-org transfer** needs a **personal** API key (org keys only work
-inside one org).
+inside one org). Projects with **GitHub or Vercel** integrations in Neon **cannot
+be transferred**; the API returns **422** ([Transfer projects](https://neon.com/docs/manage/orgs-project-transfer)).
 - **After a finalized snapshot restore**, the active branch ID changes. Poll
 operations to completion before reconnecting. Delete orphaned `(old)` branches
 to avoid storage cost.
 - **Billing-aligned usage:** prefer
 `GET /api/v2/consumption_history/v2/projects` over legacy consumption
-endpoints.
+endpoints. **`GET /api/v2/consumption_history/account`** is deprecated with a
+planned sunset of **2026-06-01**; migrate to the v2 **per-project** endpoint
+([legacy consumption guide](https://neon.com/docs/guides/consumption-metrics-legacy)).
+- **V2 `metrics` parameter values** (for implementers): `compute_unit_seconds`,
+`root_branch_bytes_month`, `child_branch_bytes_month`,
+`instant_restore_bytes_month`, `snapshot_storage_bytes_month`,
+`public_network_transfer_bytes`, `private_network_transfer_bytes`,
+`extra_branches_month` ([consumption metrics](https://neon.com/docs/guides/consumption-metrics#required-parameters)).
 - **Snapshot schedules** are not provided on Agent Plan. Partners implement via
 snapshot API + their own scheduler.
 - **Rates and caps:** never invent dollar amounts or limits. Confirm on live
@@ -102,6 +110,7 @@ Key points:
 quotas).
 - **Personal API key:** required to transfer a project between orgs when a
 customer changes tier, then PATCH quotas to match the new tier.
+- **Project-scoped API key:** [member-level access](https://neon.com/docs/manage/api-keys#create-project-scoped-organization-api-keys) to **one** project only—narrower than an org key and useful for per-tenant runtime or automation that must not touch the rest of the org. Cannot create new projects org-wide; invalid if the project is transferred out of the org.
 
 Links:
 [Agent Plan](https://neon.com/docs/introduction/agent-plan) ·
@@ -188,7 +197,8 @@ geographic or legal separation—product defaults and limits belong on live docs
 do not invent caps.
 - **Organization API keys are scoped to one org.** Cross-org moves use a
 **personal** API key and project transfer, as in **Gotchas**—do not assume an
-org key can operate across orgs.
+org key can operate across orgs. **Project-scoped** keys are further limited to a
+single project ([API keys](https://neon.com/docs/manage/api-keys)).
 
 **Embedding hygiene:**
 
@@ -253,7 +263,14 @@ Link:
 [Agent Plan](https://neon.com/docs/introduction/agent-plan) and
 [consumption metrics](https://neon.com/docs/guides/consumption-metrics).
 - Use `GET /api/v2/consumption_history/v2/projects` for billing-aligned fields.
-Legacy endpoints differ.
+Legacy endpoints differ. **`GET /api/v2/consumption_history/account`** is
+deprecated (sunset **2026-06-01**); use v2 per-project metrics instead
+([legacy guide](https://neon.com/docs/guides/consumption-metrics-legacy)).
+- V2 `metrics` query strings are exactly: `compute_unit_seconds`,
+`root_branch_bytes_month`, `child_branch_bytes_month`,
+`instant_restore_bytes_month`, `snapshot_storage_bytes_month`,
+`public_network_transfer_bytes`, `private_network_transfer_bytes`,
+`extra_branches_month`.
 - Poll consumption roughly every 15 minutes. Polling does not wake suspended
 computes.
 - Run `auth-users.ts meta` from

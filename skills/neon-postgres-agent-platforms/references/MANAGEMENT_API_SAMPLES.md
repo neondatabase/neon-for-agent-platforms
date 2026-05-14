@@ -25,7 +25,7 @@ For **`curl`** examples aimed at **your product’s own REST API** (checkpoints,
 | Requirement | Notes |
 |-------------|--------|
 | Node.js **20+** | Enables `node --env-file=.env` (or export vars manually). |
-| `NEON_API_KEY` | [API key](https://neon.com/docs/manage/api-keys). Org keys are scoped to one org; **personal** keys can transfer projects across orgs. |
+| `NEON_API_KEY` | [API key](https://neon.com/docs/manage/api-keys). **Organization** keys cover one org; **personal** keys can transfer projects across orgs. **Project-scoped** keys are limited to one project (good for per-tenant runtime automation; cannot create org-wide resources or new projects). |
 | `NEON_ORG_ID` | Often required when creating projects with a personal key. |
 | **`.env`** | Copy [`.env.example`](../../../scripts/.env.example), **`NEON_API_KEY`** required; scripts load it via **`dotenv`**. You can still use **`node --env-file=.env …`** if you prefer explicit loading. |
 
@@ -67,7 +67,7 @@ After editing **`scripts/**/*.ts`**, run **`npm run build`** again (or rely on n
 | [`scripts/versioning-flow.ts`](../../../scripts/versioning-flow.ts) | `npm run versioning-flow` | **Versioning demo**: snapshot production → child branch → **restore** baseline onto child (Management API only; no bundled SQL driver). See [AI database versioning](https://neon.com/docs/ai/ai-database-versioning). |
 | [`scripts/restore-snapshot.ts`](../../../scripts/restore-snapshot.ts) | `npm run restore-snapshot` | **One-shot restore**: applies an existing snapshot id to a target branch id. |
 | [`scripts/promote-safe-production.ts`](../../../scripts/promote-safe-production.ts) | `npm run promote-safe -- <subcommand>` | **[Promoting Postgres safely](https://neon.com/blog/promoting-postgres-changes-safely-production)**, `bootstrap-dev`, `promote`, `refresh-dev`, `rollback-prod`. |
-| [`scripts/transfer-project.ts`](../../../scripts/transfer-project.ts) | `npm run transfer` | Moves project(s) between orgs (e.g. sponsored → paid). Needs **personal** API key + permissions. |
+| [`scripts/transfer-project.ts`](../../../scripts/transfer-project.ts) | `npm run transfer` | Moves project(s) between orgs (e.g. sponsored → paid). Needs **personal** API key + permissions. **422** if any listed project has a **GitHub or Vercel** integration ([transfer limits](https://neon.com/docs/manage/orgs-project-transfer#via-api-for-automation-or-large-numbers-of-projects)). |
 | [`scripts/consumption-query.ts`](../../../scripts/consumption-query.ts) | `npm run consumption` | **`GET /consumption_history/v2/projects`**, usage-based metrics aligned with billing. |
 | [`scripts/auth-users.ts`](../../../scripts/auth-users.ts) | `npm run auth-users` | Neon **Auth** REST: **`meta`** (no API call, prints routing + SQL hint), **`create`**, **`delete`**. Requires Auth enabled on the branch first. |
 
@@ -130,6 +130,8 @@ Copy [`.env.example`](../../../scripts/.env.example) and set only what you need.
 | `NEON_SOURCE_ORG_ID`, `NEON_DESTINATION_ORG_ID` | `transfer-project.ts` |
 | `NEON_PROJECT_IDS` or `NEON_PROJECT_ID` | Comma-separated or single project id |
 
+Projects linked to **GitHub** or **Vercel** in Neon cannot be transferred; the transfer API responds with **422** for those project IDs. Remove or re-home the integration first, or provision a fresh project in the destination org. See [Transfer projects](https://neon.com/docs/manage/orgs-project-transfer).
+
 ### Consumption API (v2)
 
 | Variable | Used by |
@@ -140,6 +142,10 @@ Copy [`.env.example`](../../../scripts/.env.example) and set only what you need.
 | `CONSUMPTION_METRICS` | Optional comma list (defaults include compute + storage + transfer) |
 | `CONSUMPTION_PROJECT_IDS` | Optional comma-separated Neon project ids to include (this script does **not** read `NEON_PROJECT_ID`) |
 | `CONSUMPTION_LIMIT`, `CONSUMPTION_CURSOR` | Pagination |
+
+**Legacy account endpoint:** `GET /api/v2/consumption_history/account` is **deprecated** with a planned sunset of **2026-06-01**. Prefer this repo’s **`consumption-query.ts`** (`GET /consumption_history/v2/projects`) for invoice-aligned, per-project metrics. If you still need legacy metric shapes, see [Query consumption metrics (legacy)](https://neon.com/docs/guides/consumption-metrics-legacy).
+
+**`metrics` values (v2):** pass a subset or all of: `compute_unit_seconds`, `root_branch_bytes_month`, `child_branch_bytes_month`, `instant_restore_bytes_month`, `snapshot_storage_bytes_month`, `public_network_transfer_bytes`, `private_network_transfer_bytes`, `extra_branches_month`. These are the strings accepted in `CONSUMPTION_METRICS` and by the API `metrics` parameter ([consumption metrics guide](https://neon.com/docs/guides/consumption-metrics#required-parameters)).
 
 ### Neon Auth users
 
