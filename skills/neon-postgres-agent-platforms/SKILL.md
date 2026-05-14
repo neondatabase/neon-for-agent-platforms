@@ -121,13 +121,90 @@ Link: [HIPAA on Neon](https://neon.com/docs/security/hipaa)
 
 ## Fleet shape: project-per-tenant
 
-- Neon's documented pattern is **one project per tenant app**. Isolation and
-quotas align with Agent Plan metering.
-- Sharing one project across tenants is an exception with higher complexity
-(RLS, migrations, fairness).
+- **Project-per-tenant** is Neon's documented fleet pattern: each **tenant** you
+provision for (an end **user**, a customer **app**, or an **agent** workload)
+gets its own **dedicated Neon project**. That project is the isolation boundary
+for **branches**, **databases**, **roles**, and **computes**—not a shared
+Postgres cluster where you only partition by schema.
+- **Isolation and billing:** Separate projects give **complete data and resource
+isolation** between tenants, keep **consumption limits and billing**
+straightforward at project scale (aligned with Agent Plan metering elsewhere in
+this skill), and match **how the Neon Management API and Console are structured**
+(project-scoped create, quota, and lifecycle calls).
+- **Exception:** Sharing **one project across multiple tenants** stays possible
+but is advanced: RLS, migration cadence, and noisy-neighbor fairness become your
+responsibility.
+
+### Staging and production
+
+- For **each** tenant project, treat **staging versus production** (and ephemeral
+**previews**) as **branch- and snapshot-driven** lifecycle inside that
+project—use **Snapshots and database versioning** and **Sandbox and preview
+databases** below for fleet orchestration, not a second project by default.
+- **Agent and app builders:** separate **your platform's** environments (for
+example how you host the builder or control plane) from **each tenant's** staging
+and production **branches**—avoid conflating "our production service" with "the
+tenant's production branch" in ledgers and automation.
+- Some **embedded** products also split an end customer's **production and
+development** Neon assets across **separate orgs** for trust, keys, and billing
+boundaries; when that applies, read **Isolation beyond branches (project and org
+edge cases)** next.
 
 Link:
 [AI Agent integration guide](https://neon.com/docs/guides/ai-agent-integration)
+
+## Isolation beyond branches (project and org edge cases)
+
+Use **project-** or **org-level** splits when tenant scope or trust needs go
+beyond **branch- and snapshot-first** staging and production in **Fleet shape**.
+**Embedded** products may isolate an end customer's **production versus
+development** databases across **separate Neon orgs**, not only branches—tighter
+billing, org API keys, and console boundaries while you still manage branches
+**within** each org.
+
+**Project-level isolation (multiple projects per tenant or workload):**
+
+- Stronger **blast radius** if a connection string or role is compromised—one
+leak should not span unrelated workloads.
+- **Separate operational lifecycles** (for example a disposable analytics or
+migration sandbox versus production data) when automation or ownership would
+otherwise collide in one Postgres.
+- **Different teams or automation** with conflicting migration or admin rights.
+- **Harder compliance or data-mixing rules** where a single database must not
+host combined workloads.
+
+Each extra project adds fleet surface area: more API keys, more consumption
+rows, more housekeeping, and higher operational cost—keep **project-per-tenant**
+as the default unless a boundary above clearly applies.
+
+**Org-level isolation (beyond sponsored free versus paid):**
+
+- The **two-organization** layout in **Agent Plan and two organizations** is
+the commercial split (free-tier users versus paying customers). That pattern
+can **stack** with an embedded product split: for example **prod org versus dev
+org per end customer** so playground databases never share org scope with shipped
+production. Keep a clear internal map of which org owns which environment and
+tier.
+- Separately, partners sometimes need **additional Neon orgs or accounts** for
+contracting (enterprise “their org only”), reseller or MSP models, or
+geographic or legal separation—product defaults and limits belong on live docs;
+do not invent caps.
+- **Organization API keys are scoped to one org.** Cross-org moves use a
+**personal** API key and project transfer, as in **Gotchas**—do not assume an
+org key can operate across orgs.
+
+**Embedding hygiene:**
+
+- Map each platform service (control plane, tenant runtime, billing or
+consumption jobs) to **least-privilege** keys; do not reuse production keys in
+sandboxes at the wrong layer.
+- When prod and dev for an end customer live in **different Neon orgs**, scope
+automation per org (typically **one organization API key per org**) and persist
+`org_id` with `project_id` / `branch_id` so jobs and restores target the correct
+side.
+- Keep your ledger (`project_id`, `branch_id`, org, checkpoint metadata)
+aligned with the isolation layer you chose so restores, transfers, and audits
+stay consistent.
 
 ## Snapshots and database versioning
 
