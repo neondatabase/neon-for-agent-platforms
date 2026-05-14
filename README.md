@@ -80,6 +80,7 @@ flowchart LR
 
 ```
 neon-for-agent-platforms/
+├── LICENSE
 ├── README.md
 ├── scripts/                           # Runnable TS samples (npm run build)
 └── skills/neon-postgres-agent-platforms/
@@ -96,27 +97,6 @@ neon-for-agent-platforms/
 
 ---
 
-## Reference
-
-
-| Resource                                                                                               | Notes                                     |
-| ------------------------------------------------------------------------------------------------------ | ----------------------------------------- |
-| [MANAGEMENT_API_SAMPLES.md](skills/neon-postgres-agent-platforms/references/MANAGEMENT_API_SAMPLES.md) | Script catalog, env vars, `npm run` flows |
-| [references/README.md](skills/neon-postgres-agent-platforms/references/README.md)                      | Doc index and symlink table               |
-| [SKILL.md](skills/neon-postgres-agent-platforms/SKILL.md)                                              | Companion skill                           |
-| [Agent Skills repo](https://github.com/neondatabase/agent-skills)                                      | `neon-postgres` install bundle            |
-| [AI Agent Platforms](https://neon.com/use-cases/ai-agents)                                             | Program overview                          |
-| [API reference](https://api-docs.neon.tech)                                                            | Management API                            |
-
-
-**Requirements:** Node 20+, [Neon API key](https://neon.com/docs/manage/api-keys). Org-scoped keys need `NEON_ORG_ID` — see `.env.example`.
-
----
-
-## Contributing
-
-From `scripts/`: `npm install`, `npm run build`, `npm run fmt:check`, `npm run typecheck`. Format with `npm run fmt`. See [AGENTS.md](AGENTS.md).
-
 ## Support
 
 - Agent Program: shared Slack with Neon
@@ -125,4 +105,4 @@ From `scripts/`: `npm install`, `npm run build`, `npm run fmt:check`, `npm run t
 
 ## License
 
-Apache 2.0 — see [LICENSE](skills/neon-postgres-agent-platforms/references/LICENSE).
+Apache 2.0 — see [LICENSE](LICENSE).

@@ -14,7 +14,7 @@ description: >-
   neon-for-agent-platforms.
 license: Apache-2.0
 
-# Neon AI Agent Program (companion skill)
+# Neon AI Agent Program 
 
 Companion to `**neon-postgres**` (install that first). This skill covers
 fleet-scale control plane for the Neon Agent Program: dual-org layout, project
@@ -37,7 +37,7 @@ question involves:
 - Agent Plan commercial terms (with links, not invented numbers)
 - Partner support paths
 
-## Install (order matters)
+## Install Skills
 
 **Step 1:** Install the primary Neon skill from
 [neondatabase/agent-skills](https://github.com/neondatabase/agent-skills):
@@ -251,7 +251,7 @@ Runnable Management API automation from
 - **Checkpoint orchestration:**
 [CHECKPOINT_ORCHESTRATION_PATTERN.md](https://github.com/neondatabase/neon-for-agent-platforms/blob/main/skills/neon-postgres-agent-platforms/references/CHECKPOINT_ORCHESTRATION_PATTERN.md)
 - **Doc index:**
-[references/README.md](https://github.com/neondatabase/neon-for-agent-platforms/blob/main/skills/neon-postgres-agent-platforms/references/README.md)
+[SCRIPT-OVERVIEW.md](https://github.com/neondatabase/neon-for-agent-platforms/blob/main/skills/neon-postgres-agent-platforms/references/SCRIPT-OVERVIEW.md)
 
 All scripts use `@neondatabase/api-client` only. Shared
 [utils.ts](https://github.com/neondatabase/neon-for-agent-platforms/blob/main/scripts/utils.ts)
