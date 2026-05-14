@@ -9,7 +9,7 @@ For clone, install, and quick start, see the [root README](../../../README.md).
 2. **[COMPOUND_CHECKPOINTS_FOR_AGENT_PLATFORMS.md](COMPOUND_CHECKPOINTS_FOR_AGENT_PLATFORMS.md)** — what belongs in a compound checkpoint **record** (dimensions: revision, Neon ids, secrets, URLs, metadata).
 3. **[CHECKPOINT_ORCHESTRATION_PATTERN.md](CHECKPOINT_ORCHESTRATION_PATTERN.md)** — how meta DB, workflows, Neon API calls, and **restore ordering** usually fit together. Read **after** (2) when you need architecture, not before.
 
-Optional: **[application-rest-api/](application-rest-api/)** (curl against **your** app API, not Neon console), **[pricing-and-plan-features.md](pricing-and-plan-features.md)**, **[AGENTS.md](AGENTS.md)** (symlink to repo root `AGENTS.md`), **[LICENSE](../../../LICENSE)**.
+Optional: **[application-rest-api/](application-rest-api/)** (curl against **your** app API, not Neon console), **[pricing-and-plan-features.md](pricing-and-plan-features.md)**, **[LICENSE](../../../LICENSE)**.
 
 ## Symlinked TypeScript (canonical: `../../../scripts/`)
 
