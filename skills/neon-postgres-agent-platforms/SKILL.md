@@ -131,9 +131,6 @@ isolation** between tenants, keep **consumption limits and billing**
 straightforward at project scale (aligned with Agent Plan metering elsewhere in
 this skill), and match **how the Neon Management API and Console are structured**
 (project-scoped create, quota, and lifecycle calls).
-- **Exception:** Sharing **one project across multiple tenants** stays possible
-but is advanced: RLS, migration cadence, and noisy-neighbor fairness become your
-responsibility.
 
 ### Staging and production
 
