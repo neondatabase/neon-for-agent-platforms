@@ -46,10 +46,12 @@ question involves:
 npx skills add neondatabase/agent-skills -s neon-postgres
 ```
 
-**Step 2:** Install this companion skill for Agent Program context:
+**Step 2:** Install this companion skill for Agent Program context from
+[this repository](https://github.com/neondatabase/neon-for-agent-platforms)
+(it is not published in agent-skills):
 
 ```bash
-npx skills add neondatabase/agent-skills -s neon-postgres-agent-platforms
+npx skills add neondatabase/neon-for-agent-platforms -s neon-postgres-agent-platforms
 ```
 
 Teams not on the Agent Program may use Step 1 alone. Everyone else needs both.
