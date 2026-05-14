@@ -44,10 +44,10 @@ Formatting aligns with [postgres-skills](https://github.com/neondatabase/postgre
 
 Expectations: ES modules; TypeScript sources in `**scripts/**`, compiled to `**dist/scripts/*.js**` via `**npm run build**`; `**npm run …**` runs `**build**` then `**node dist/scripts/…**`; runtime deps are `**@neondatabase/api-client`** and `**dotenv`** only; validate `**NEON_API_KEY`** (and script-specific env) at startup; prefer structured JSON for machine-readable CLI output; never commit `.env`, keys, or connection strings.
 
-When you add or rename a `**scripts/*.ts`** file, add a matching **symlink** in `**skills/neon-postgres-agent-platforms/references/`**, update **[MANAGEMENT_API_SAMPLES.md](skills/neon-postgres-agent-platforms/references/MANAGEMENT_API_SAMPLES.md)** and **[references/README.md](skills/neon-postgres-agent-platforms/references/README.md)** (doc index / symlink catalog), and mention new scripts in the root **[README.md](README.md)** if the human-facing story changes.
+When you add or rename a `**scripts/*.ts`** file, add a matching **symlink** in `**skills/neon-postgres-agent-platforms/references/`**, update **[MANAGEMENT_API_SAMPLES.md](skills/neon-postgres-agent-platforms/references/MANAGEMENT_API_SAMPLES.md)** and **[SCRIPT-OVERVIEW.md](skills/neon-postgres-agent-platforms/references/SCRIPT-OVERVIEW.md)** (doc index / symlink catalog), and mention new scripts in the root **[README.md](README.md)** if the human-facing story changes.
 
 ## Docs and onboarding
 
 **Human onboarding** uses **[Quick start in README](README.md#quick-start)** (repository root) only; do not introduce a second “getting started” story in other files without linking back there.
 
-Keep cross-links between **[README.md](README.md)** (single human entry point), **[MANAGEMENT_API_SAMPLES.md](skills/neon-postgres-agent-platforms/references/MANAGEMENT_API_SAMPLES.md)**, and **[SKILL.md](skills/neon-postgres-agent-platforms/SKILL.md)** consistent when you add or rename scripts.
+Keep cross-links between **[README.md](README.md)** (single human entry point), **[MANAGEMENT_API_SAMPLES.md](skills/neon-postgres-agent-platforms/references/MANAGEMENT_API_SAMPLES.md)**, **[SCRIPT-OVERVIEW.md](skills/neon-postgres-agent-platforms/references/SCRIPT-OVERVIEW.md)**, and **[SKILL.md](skills/neon-postgres-agent-platforms/SKILL.md)** consistent when you add or rename scripts.
