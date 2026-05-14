@@ -1,6 +1,16 @@
 /**
  * GET /consumption_history/v2/projects: usage-based metrics aligned with billing.
+ *
+ * `metrics` query parameter: comma-separated or repeated; each value must be one of:
+ * `compute_unit_seconds`, `root_branch_bytes_month`, `child_branch_bytes_month`,
+ * `instant_restore_bytes_month`, `snapshot_storage_bytes_month`,
+ * `public_network_transfer_bytes`, `private_network_transfer_bytes`, `extra_branches_month`.
+ *
+ * Do not use legacy `GET /consumption_history/account` for new work; it is deprecated with a planned
+ * sunset of **2026-06-01** — use this v2 project endpoint (or legacy per-project metrics only if you
+ * still need legacy fields). See Neon’s consumption docs.
  * @see https://neon.com/docs/guides/consumption-metrics
+ * @see https://neon.com/docs/guides/consumption-metrics-legacy
  */
 import "dotenv/config";
 import {

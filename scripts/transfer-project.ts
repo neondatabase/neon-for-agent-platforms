@@ -1,6 +1,9 @@
 /**
  * Transfer one or more projects from a source org to a destination org (e.g. free / sponsored → paid).
  * Personal API key with access to both orgs; see Neon docs on org project transfer.
+ *
+ * Projects with GitHub or Vercel integrations cannot be transferred; the API returns **422** in that case.
+ * @see https://neon.com/docs/manage/orgs-project-transfer
  */
 import "dotenv/config";
 import { createApiClient } from "@neondatabase/api-client";

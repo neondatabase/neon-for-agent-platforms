@@ -31,7 +31,7 @@ Each **`*.ts`** here is a symlink to the same file under **`scripts/`** so assis
 | [rename-snapshot.ts](rename-snapshot.ts) | PATCH rename snapshot. |
 | [restore-snapshot.ts](restore-snapshot.ts) | Apply snapshot to a branch. |
 | [snapshot.ts](snapshot.ts) | Create logical snapshot on default branch. |
-| [transfer-project.ts](transfer-project.ts) | Move project between orgs (personal key). |
+| [transfer-project.ts](transfer-project.ts) | Move project between orgs (personal key). **422** if GitHub/Vercel integration is installed on a project. |
 | [versioning-flow.ts](versioning-flow.ts) | Snapshot → branch → restore demo. |
 | [utils.ts](utils.ts) | Shared polling helpers for async Management API ops. |
 
