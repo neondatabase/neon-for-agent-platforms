@@ -50,7 +50,7 @@ npm run versioning-flow # NEON_API_KEY + NEON_PROJECT_ID in .env
 
 ## Fleet and org model (summary)
 
-Partners typically run two Neon organizations so free-tier users and paying customers land in separate pools. Your control plane picks which org when creating a tenant project; upgrades often mean transferring into the paid org and raising quotas. Use **organization** API keys per org, a **personal** API key for cross-org transfer, and optionally **[project-scoped](https://neon.com/docs/manage/api-keys#create-project-scoped-organization-api-keys)** keys when automation should touch only one tenant project. Projects with **GitHub or Vercel** Neon integrations **cannot** be transferred between orgs (API **422**); see [Transfer projects](https://neon.com/docs/manage/orgs-project-transfer).
+Partners typically run two Neon organizations so free-tier users and paying customers land in separate pools. Your control plane picks which org when creating a tenant project; upgrades often mean transferring into the paid org and raising quotas. Use organization API keys per org and a personal API key for cross-org transfer.
 
 
 | Org                    | Typical role                                                                               |
