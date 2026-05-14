@@ -1,6 +1,6 @@
 ---
 
-## name: neon-postgres-agent-platforms
+name: neon-postgres-agent-platforms
 description: >-
   Multi-tenant AI agent platforms on Neon: provisioning many projects/databases
   per user, dual orgs (sponsored free + paid), org vs personal API keys, project
@@ -13,8 +13,9 @@ description: >-
   database versioning at platform scale, pricing, org limits, HIPAA, or
   neon-for-agent-platforms.
 license: Apache-2.0
+---
 
-# Neon AI Agent Program 
+# Neon AI Agent Program
 
 Companion to `**neon-postgres**` (install that first). This skill covers
 fleet-scale control plane for the Neon Agent Program: dual-org layout, project
@@ -39,22 +40,10 @@ question involves:
 
 ## Install Skills
 
-**Step 1:** Install the primary Neon skill from
-[neondatabase/agent-skills](https://github.com/neondatabase/agent-skills):
-
 ```bash
 npx skills add neondatabase/agent-skills -s neon-postgres
-```
-
-**Step 2:** Install this companion skill for Agent Program context from
-[this repository](https://github.com/neondatabase/neon-for-agent-platforms)
-(it is not published in agent-skills):
-
-```bash
 npx skills add neondatabase/neon-for-agent-platforms -s neon-postgres-agent-platforms
 ```
-
-Teams not on the Agent Program may use Step 1 alone. Everyone else needs both.
 
 ## Assistants: what you can do after install
 

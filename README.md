@@ -22,16 +22,14 @@ Official Neon docs:
 
 ## Quick start
 
-### 1. Install the skills
-
-Install the primary Neon skill from [neondatabase/agent-skills](https://github.com/neondatabase/agent-skills), then this repo’s companion skill (it is not bundled in agent-skills):
+### Install skills
 
 ```bash
 npx skills add neondatabase/agent-skills -s neon-postgres
 npx skills add neondatabase/neon-for-agent-platforms -s neon-postgres-agent-platforms
 ```
 
-### 2. Clone and run
+### Clone and run
 
 ```bash
 git clone https://github.com/neondatabase/neon-for-agent-platforms.git
