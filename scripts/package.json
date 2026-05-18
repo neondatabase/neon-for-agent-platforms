@@ -10,6 +10,9 @@
   },
   "keywords": ["neon", "postgres", "agent-skills", "ai-agents"],
   "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "fmt": "prettier --write \"**/*.ts\"",
     "fmt:check": "prettier --check \"**/*.ts\"",
