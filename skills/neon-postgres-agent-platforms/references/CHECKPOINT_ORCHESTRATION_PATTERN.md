@@ -12,7 +12,7 @@ This folder’s **`scripts/*.ts`** files stay **API-sized**: they cover the Neon
 
 | Layer | Responsibility |
 | ----- | ---------------- |
-| **Neon integration** | Wrap `@neondatabase/api-client`: projects, branches, logical snapshots, restore, connection URIs, operation polling (patterns align with [`utils.ts`](utils.ts) and the sample scripts). |
+| **Neon integration** | Wrap `@neondatabase/api-client`: projects, branches, logical snapshots, restore, connection URIs, operation polling (patterns align with [`utils.ts`](../../../scripts/utils.ts) and the sample scripts). |
 | **Meta database** | Version rows that bind `neon_snapshot_id` (and related Neon ids) to `git_commit_hash` / artifact id / timestamps / optional assistant or run ids. Often separate tables for tenant secrets or env snapshots. |
 | **Checkpoint workflow** | When the user or agent creates a checkpoint: resolve **latest source revision** and **create a Neon snapshot** (often in parallel), then insert one **version** row so code and DB state stay aligned. |
 | **HTTP or queue entry** | User-facing `POST …/checkpoint` or internal job that starts the workflow (workflow engine is product-specific). |
@@ -24,10 +24,10 @@ This folder’s **`scripts/*.ts`** files stay **API-sized**: they cover the Neon
 
 | Neon-shaped concern | Sample in this repo (`scripts/` / symlinks here) |
 | ------------------- | ----------------------------------------------- |
-| Create logical snapshot | [`snapshot.ts`](snapshot.ts) |
-| Restore snapshot onto a branch | [`restore-snapshot.ts`](restore-snapshot.ts) |
-| Snapshot → branch → restore demo | [`versioning-flow.ts`](versioning-flow.ts) |
-| Provision project + enable branch Auth (admin) | [`create-project-with-auth.ts`](create-project-with-auth.ts) |
+| Create logical snapshot | [`snapshot.ts`](../../../scripts/snapshot.ts) |
+| Restore snapshot onto a branch | [`restore-snapshot.ts`](../../../scripts/restore-snapshot.ts) |
+| Snapshot → branch → restore demo | [`versioning-flow.ts`](../../../scripts/versioning-flow.ts) |
+| Provision project + enable branch Auth (admin) | [`create-project-with-auth.ts`](../../../scripts/create-project-with-auth.ts) |
 
 ---
 
@@ -41,4 +41,4 @@ Products differ on **Neon Auth** setup (`better_auth`, other providers, or separ
 
 - **[MANAGEMENT_API_SAMPLES.md](MANAGEMENT_API_SAMPLES.md)** — env vars and npm commands for the scripts above.
 - **[COMPOUND_CHECKPOINTS_FOR_AGENT_PLATFORMS.md](COMPOUND_CHECKPOINTS_FOR_AGENT_PLATFORMS.md)** — dimensions to persist beyond Neon ids.
-- **[AI database versioning](https://neon.com/docs/ai/ai-database-versioning)** — Neon semantics for snapshots and restore.
+- **[AI database versioning](https://neon.com/docs/ai/ai-database-versioning.md)** — Neon semantics for snapshots and restore.
