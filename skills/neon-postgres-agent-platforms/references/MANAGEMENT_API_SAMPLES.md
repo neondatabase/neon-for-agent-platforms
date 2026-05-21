@@ -1,6 +1,6 @@
 # Management API samples (`scripts/`)
 
-Small **Node.js + TypeScript** scripts that call Neon’s official **[Management API TypeScript SDK](https://neon.com/docs/reference/typescript-sdk.md)** ([`@neondatabase/api-client`](https://registry.npmjs.org/@neondatabase/api-client)) via **`createApiClient`**, **no other Neon npm packages**. Sources live in **[`scripts/`](../../../scripts/)**; **`npm run build`** runs **`tsc`** and emits **`dist/scripts/*.js`** per **[`tsconfig.json`](../../../scripts/tsconfig.json)**. **`npm run typecheck`** runs **`tsc --noEmit`** (no emit). Scripts **`import "dotenv/config"`** so variables from **`.env`** load automatically; run with **`node dist/scripts/<name>.js`** or **`npm run …`** (each npm script runs **`build`** then **`node dist/scripts/...`**).
+Small **Node.js + TypeScript** scripts that call Neon’s official **[Management API TypeScript SDK](https://neon.com/docs/reference/typescript-sdk.md)** ([`@neondatabase/api-client`](https://registry.npmjs.org/@neondatabase/api-client)) via **`createApiClient`**, **no other Neon npm packages**. Sources live in **[`scripts/`](../scripts/)**; **`npm run build`** runs **`tsc`** and emits **`dist/scripts/*.js`** per **[`tsconfig.json`](../scripts/tsconfig.json)**. **`npm run typecheck`** runs **`tsc --noEmit`** (no emit). Scripts **`import "dotenv/config"`** so variables from **`.env`** load automatically; run with **`node dist/scripts/<name>.js`** or **`npm run …`** (each npm script runs **`build`** then **`node dist/scripts/...`**).
 
 **When we say “Neon TypeScript SDK” here, we mean [`@neondatabase/api-client`](https://registry.npmjs.org/@neondatabase/api-client) and nothing else**, not `@neondatabase/serverless`, `@neondatabase/neon-js`, `@neondatabase/toolkit`, or any other `@neondatabase/*` package.
 
@@ -32,10 +32,10 @@ For **`curl`** examples aimed at **your product’s own REST API** (checkpoints,
 Install dependencies:
 
 ```bash
-cd neon-for-agent-platforms/scripts
+cd neon-for-agent-platforms/skills/neon-postgres-agent-platforms/scripts
 npm install
-cp .env.example .env
-# Set NEON_API_KEY=… and any IDs your scripts need (see tables below)
+touch .env
+# Set NEON_API_KEY=... and any IDs your scripts need (see tables below)
 npm run build
 ```
 
@@ -54,22 +54,22 @@ After editing **`scripts/**/*.ts`**, run **`npm run build`** again (or rely on n
 
 | Script | npm shortcut | What it does |
 |--------|----------------|----------------|
-| [`scripts/list-projects.ts`](../../../scripts/list-projects.ts) | `npm run neon:list-projects` | Lists **project id** and **name** (Management API). |
-| [`scripts/create-project.ts`](../../../scripts/create-project.ts) | `npm run create-project` | Creates a Neon **project**; prints `projectId` and `DATABASE_URL`. Waits for initial operations to finish. |
-| [`scripts/create-project-with-auth.ts`](../../../scripts/create-project-with-auth.ts) | `npm run create-project-with-auth` | Same as **create-project**, then enables Neon Auth on the default branch (**Better Auth**). Saves Auth keys once, see stderr note. |
-| [`scripts/delete-project.ts`](../../../scripts/delete-project.ts) | `npm run delete-project` | **Deletes** a project by id (destructive). |
-| [`scripts/branch.ts`](../../../scripts/branch.ts) | `npm run branch` | **`list`**, JSON list of branches. **`create <name>`**, new branch from **main** / **production** (or `NEON_PARENT_BRANCH_ID`). |
-| [`scripts/snapshot.ts`](../../../scripts/snapshot.ts) | `npm run snapshot` | Creates a **logical snapshot** on the default branch. Optional **`NEON_SNAPSHOT_EXPIRES_AT`** (RFC 3339) for auto-deletion per [cleanup strategy](https://neon.com/docs/ai/ai-database-versioning.md#cleanup-strategy). |
-| [`scripts/list-snapshots.ts`](../../../scripts/list-snapshots.ts) | `npm run list-snapshots` | **Lists** all snapshots for **`NEON_PROJECT_ID`**. |
-| [`scripts/delete-snapshot.ts`](../../../scripts/delete-snapshot.ts) | `npm run delete-snapshot` | **Deletes** one snapshot by **`NEON_SNAPSHOT_ID`** (polls operations). |
-| [`scripts/rename-snapshot.ts`](../../../scripts/rename-snapshot.ts) | `npm run rename-snapshot` | **PATCH** rename, **`NEON_SNAPSHOT_NEW_NAME`**. |
-| [`scripts/delete-branch.ts`](../../../scripts/delete-branch.ts) | `npm run delete-branch` | **Deletes** a branch by **`NEON_BRANCH_ID`** (e.g. orphaned **`main (old)`** after restore); destructive. |
-| [`scripts/versioning-flow.ts`](../../../scripts/versioning-flow.ts) | `npm run versioning-flow` | **Versioning demo**: snapshot production → child branch → **restore** baseline onto child (Management API only; no bundled SQL driver). See [AI database versioning](https://neon.com/docs/ai/ai-database-versioning.md). |
-| [`scripts/restore-snapshot.ts`](../../../scripts/restore-snapshot.ts) | `npm run restore-snapshot` | **One-shot restore**: applies an existing snapshot id to a target branch id. |
-| [`scripts/promote-safe-production.ts`](../../../scripts/promote-safe-production.ts) | `npm run promote-safe -- <subcommand>` | **[Promoting Postgres safely](https://neon.com/blog/promoting-postgres-changes-safely-production)**, `bootstrap-dev`, `promote`, `refresh-dev`, `rollback-prod`. |
-| [`scripts/transfer-project.ts`](../../../scripts/transfer-project.ts) | `npm run transfer` | Moves project(s) between orgs (e.g. sponsored → paid). Needs **personal** API key + permissions. **422** if any listed project has a **GitHub or Vercel** integration ([transfer limits](https://neon.com/docs/manage/orgs-project-transfer.md#via-api-for-automation-or-large-numbers-of-projects)). |
-| [`scripts/consumption-query.ts`](../../../scripts/consumption-query.ts) | `npm run consumption` | **`GET /consumption_history/v2/projects`**, usage-based metrics aligned with billing. |
-| [`scripts/auth-users.ts`](../../../scripts/auth-users.ts) | `npm run auth-users` | Neon **Auth** REST: **`meta`** (no API call, prints routing + SQL hint), **`create`**, **`delete`**. Requires Auth enabled on the branch first. |
+| [`scripts/list-projects.ts`](../scripts/list-projects.ts) | `npm run neon:list-projects` | Lists **project id** and **name** (Management API). |
+| [`scripts/create-project.ts`](../scripts/create-project.ts) | `npm run create-project` | Creates a Neon **project**; prints `projectId` and `DATABASE_URL`. Waits for initial operations to finish. |
+| [`scripts/create-project-with-auth.ts`](../scripts/create-project-with-auth.ts) | `npm run create-project-with-auth` | Same as **create-project**, then enables Neon Auth on the default branch (**Better Auth**). Saves Auth keys once, see stderr note. |
+| [`scripts/delete-project.ts`](../scripts/delete-project.ts) | `npm run delete-project` | **Deletes** a project by id (destructive). |
+| [`scripts/branch.ts`](../scripts/branch.ts) | `npm run branch` | **`list`**, JSON list of branches. **`create <name>`**, new branch from **main** / **production** (or `NEON_PARENT_BRANCH_ID`). |
+| [`scripts/snapshot.ts`](../scripts/snapshot.ts) | `npm run snapshot` | Creates a **logical snapshot** on the default branch. Optional **`NEON_SNAPSHOT_EXPIRES_AT`** (RFC 3339) for auto-deletion per [cleanup strategy](https://neon.com/docs/ai/ai-database-versioning.md#cleanup-strategy). |
+| [`scripts/list-snapshots.ts`](../scripts/list-snapshots.ts) | `npm run list-snapshots` | **Lists** all snapshots for **`NEON_PROJECT_ID`**. |
+| [`scripts/delete-snapshot.ts`](../scripts/delete-snapshot.ts) | `npm run delete-snapshot` | **Deletes** one snapshot by **`NEON_SNAPSHOT_ID`** (polls operations). |
+| [`scripts/rename-snapshot.ts`](../scripts/rename-snapshot.ts) | `npm run rename-snapshot` | **PATCH** rename, **`NEON_SNAPSHOT_NEW_NAME`**. |
+| [`scripts/delete-branch.ts`](../scripts/delete-branch.ts) | `npm run delete-branch` | **Deletes** a branch by **`NEON_BRANCH_ID`** (e.g. orphaned **`main (old)`** after restore); destructive. |
+| [`scripts/versioning-flow.ts`](../scripts/versioning-flow.ts) | `npm run versioning-flow` | **Versioning demo**: snapshot production → child branch → **restore** baseline onto child (Management API only; no bundled SQL driver). See [AI database versioning](https://neon.com/docs/ai/ai-database-versioning.md). |
+| [`scripts/restore-snapshot.ts`](../scripts/restore-snapshot.ts) | `npm run restore-snapshot` | **One-shot restore**: applies an existing snapshot id to a target branch id. |
+| [`scripts/promote-safe-production.ts`](../scripts/promote-safe-production.ts) | `npm run promote-safe -- <subcommand>` | **[Promoting Postgres safely](https://neon.com/blog/promoting-postgres-changes-safely-production)**, `bootstrap-dev`, `promote`, `refresh-dev`, `rollback-prod`. |
+| [`scripts/transfer-project.ts`](../scripts/transfer-project.ts) | `npm run transfer` | Moves project(s) between orgs (e.g. sponsored → paid). Needs **personal** API key + permissions. **422** if any listed project has a **GitHub or Vercel** integration ([transfer limits](https://neon.com/docs/manage/orgs-project-transfer.md#via-api-for-automation-or-large-numbers-of-projects)). |
+| [`scripts/consumption-query.ts`](../scripts/consumption-query.ts) | `npm run consumption` | **`GET /consumption_history/v2/projects`**, usage-based metrics aligned with billing. |
+| [`scripts/auth-users.ts`](../scripts/auth-users.ts) | `npm run auth-users` | Neon **Auth** REST: **`meta`** (no API call, prints routing + SQL hint), **`create`**, **`delete`**. Requires Auth enabled on the branch first. |
 
 **Restore / bootstrap:** If the API returns **`ROOT_BRANCHES_LIMIT_EXCEEDED`**, the project has hit Neon’s **root-branch** limit for your plan. Delete old branches (preview restores, `bootstrap-*`, `before_restore_*`, orphaned **`main (old)`**) using **`delete-branch.ts`** or the Console, or point **`NEON_PROJECT_ID`** at an emptier project.
 
@@ -225,7 +225,7 @@ node --env-file=.env dist/scripts/auth-users.js meta
 
 ## Shared helpers
 
-[`scripts/utils.ts`](../../../scripts/utils.ts) holds **shared helpers** on top of the same **`@neondatabase/api-client`** surface: **operation polling** (`waitForOperationsToSettle`), **error formatting**, and small **compose** helpers around **`createApiClient`** calls so scripts stay readable. There is no second Neon client package.
+[`scripts/utils.ts`](../scripts/utils.ts) holds **shared helpers** on top of the same **`@neondatabase/api-client`** surface: **operation polling** (`waitForOperationsToSettle`), **error formatting**, and small **compose** helpers around **`createApiClient`** calls so scripts stay readable. There is no second Neon client package.
 
 ---
 

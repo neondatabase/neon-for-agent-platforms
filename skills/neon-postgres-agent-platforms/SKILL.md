@@ -51,11 +51,9 @@ platform-level Neon work: dual-org layout, provisioning a project for a new
 tenant, compound checkpoints, org-wide consumption polling, and
 transfer/upgrade flows—without the user pasting long documentation.
 
-**Where runnable examples live:** TypeScript samples run from `**scripts/`** at
-the [repo root](https://github.com/neondatabase/neon-for-agent-platforms/tree/main/scripts)
-(`package.json`, `npm run …`). This skill’s `**references/**` directory
-mirrors those files as **symlinks** beside markdown guides so you can read
-source next to docs;
+**Where runnable examples live:** TypeScript samples run from this skill’s [`scripts/`](https://github.com/neondatabase/neon-for-agent-platforms/tree/main/skills/neon-postgres-agent-platforms/scripts)
+directory (`package.json`, `npm run …`). The `**references/**` directory
+keeps markdown guides beside the runnable examples;
 [MANAGEMENT_API_SAMPLES.md](https://github.com/neondatabase/neon-for-agent-platforms/blob/main/skills/neon-postgres-agent-platforms/references/MANAGEMENT_API_SAMPLES.md)
 is the script catalog and env map. The human **Quick start** is the root
 [README](https://github.com/neondatabase/neon-for-agent-platforms/blob/main/README.md#quick-start).
@@ -273,7 +271,7 @@ deprecated (sunset **2026-06-01**); use v2 per-project metrics instead
 - Poll consumption roughly every 15 minutes. Polling does not wake suspended
 computes.
 - Run `auth-users.ts meta` from
-[scripts/](https://github.com/neondatabase/neon-for-agent-platforms/tree/main/scripts)
+[scripts/](https://github.com/neondatabase/neon-for-agent-platforms/tree/main/skills/neon-postgres-agent-platforms/scripts)
 for a routing map (Neon Auth REST vs Postgres roles vs consumption APIs).
 
 Links:
@@ -335,6 +333,6 @@ Runnable Management API automation from
 [SCRIPT-OVERVIEW.md](https://github.com/neondatabase/neon-for-agent-platforms/blob/main/skills/neon-postgres-agent-platforms/references/SCRIPT-OVERVIEW.md)
 
 All scripts use `@neondatabase/api-client` only. Shared
-[utils.ts](https://github.com/neondatabase/neon-for-agent-platforms/blob/main/scripts/utils.ts)
+[utils.ts](https://github.com/neondatabase/neon-for-agent-platforms/blob/main/skills/neon-postgres-agent-platforms/scripts/utils.ts)
 polls async operations. For SQL access from app code (drivers, pooling, ORMs),
 use `**neon-postgres`**.

@@ -29,10 +29,10 @@ The Management API shapes below match the **`@neondatabase/api-client`** scripts
 
 | Concern | Minimal API surface (Neon) | Sample script (`scripts/`) |
 | ------- | -------------------------- | --------------------- |
-| Create logical snapshot | `POST .../branches/{id}/snapshot` | [`snapshot.ts`](../../../scripts/snapshot.ts) |
-| Restore snapshot onto a branch | `POST .../snapshots/{id}/restore` | [`restore-snapshot.ts`](../../../scripts/restore-snapshot.ts) |
-| End-to-end demo (root snapshot → branch → restore) | Same operations composed | [`versioning-flow.ts`](../../../scripts/versioning-flow.ts) |
-| Provision tenant project + enable branch Auth (admin) | `createProject`, branch Auth enable | [`create-project-with-auth.ts`](../../../scripts/create-project-with-auth.ts) |
+| Create logical snapshot | `POST .../branches/{id}/snapshot` | [`snapshot.ts`](../scripts/snapshot.ts) |
+| Restore snapshot onto a branch | `POST .../snapshots/{id}/restore` | [`restore-snapshot.ts`](../scripts/restore-snapshot.ts) |
+| End-to-end demo (root snapshot → branch → restore) | Same operations composed | [`versioning-flow.ts`](../scripts/versioning-flow.ts) |
+| Provision tenant project + enable branch Auth (admin) | `createProject`, branch Auth enable | [`create-project-with-auth.ts`](../scripts/create-project-with-auth.ts) |
 
 For **full-stack orchestration** (pairing Neon ids with Git/deploy/secrets in one workflow), see **[CHECKPOINT_ORCHESTRATION_PATTERN.md](CHECKPOINT_ORCHESTRATION_PATTERN.md)** for an abstract layering model and restore ordering. Your stack’s filenames and frameworks will differ; the **compound record** idea stays the same.
 
