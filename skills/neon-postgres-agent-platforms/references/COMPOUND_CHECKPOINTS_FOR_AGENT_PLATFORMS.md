@@ -29,10 +29,10 @@ The Management API shapes below match the **`@neondatabase/api-client`** scripts
 
 | Concern | Minimal API surface (Neon) | Sample script (`scripts/`) |
 | ------- | -------------------------- | --------------------- |
-| Create logical snapshot | `POST .../branches/{id}/snapshot` | [`snapshot.ts`](snapshot.ts) |
-| Restore snapshot onto a branch | `POST .../snapshots/{id}/restore` | [`restore-snapshot.ts`](restore-snapshot.ts) |
-| End-to-end demo (root snapshot → branch → restore) | Same operations composed | [`versioning-flow.ts`](versioning-flow.ts) |
-| Provision tenant project + enable branch Auth (admin) | `createProject`, branch Auth enable | [`create-project-with-auth.ts`](create-project-with-auth.ts) |
+| Create logical snapshot | `POST .../branches/{id}/snapshot` | [`snapshot.ts`](../scripts/snapshot.ts) |
+| Restore snapshot onto a branch | `POST .../snapshots/{id}/restore` | [`restore-snapshot.ts`](../scripts/restore-snapshot.ts) |
+| End-to-end demo (root snapshot → branch → restore) | Same operations composed | [`versioning-flow.ts`](../scripts/versioning-flow.ts) |
+| Provision tenant project + enable branch Auth (admin) | `createProject`, branch Auth enable | [`create-project-with-auth.ts`](../scripts/create-project-with-auth.ts) |
 
 For **full-stack orchestration** (pairing Neon ids with Git/deploy/secrets in one workflow), see **[CHECKPOINT_ORCHESTRATION_PATTERN.md](CHECKPOINT_ORCHESTRATION_PATTERN.md)** for an abstract layering model and restore ordering. Your stack’s filenames and frameworks will differ; the **compound record** idea stays the same.
 
@@ -47,6 +47,6 @@ A common pattern is a **`project_versions`** (or similarly named) table where ea
 ## Further reading
 
 - **`neon-postgres`** (agent-skills), drivers, ORMs, Auth for **applications**, generic branching and connection patterns.
-- [AI database versioning](https://neon.com/docs/ai/ai-database-versioning), Neon product semantics for snapshots and restore.
+- [AI database versioning](https://neon.com/docs/ai/ai-database-versioning.md), Neon product semantics for snapshots and restore.
 - [Checkpoints for agents with Neon Snapshots](https://neon.com/blog/checkpoints-for-agents-with-neon-snapshots)
 - Product HTTP examples (your **app** API, not `console.neon.tech`): [`application-rest-api/CURL_REFERENCE.md`](application-rest-api/CURL_REFERENCE.md)

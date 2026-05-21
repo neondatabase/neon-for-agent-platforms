@@ -2,16 +2,16 @@
 
 name: neon-postgres-agent-platforms
 description: >-
-  Multi-tenant AI agent platforms on Neon: provisioning many projects/databases
-  per user, dual orgs (sponsored free + paid), personal vs organization vs
-  project-scoped API keys, project transfer, fleet provisioning, compound checkpoints (DB + revision + secrets +
-  deploy metadata), snapshot/restore orchestration for tenants, consumption v2,
-  cost isolation, Agent Plan rates, co-marketing, support, and
-  neondatabase/neon-for-agent-platforms examples. Required companion to
-  neon-postgres (install that first). Use when users mention Neon Agent Program,
-  Agent Plan, fleet, transfer, provisioned databases per agent run, checkpoints,
-  database versioning at platform scale, pricing, org limits, HIPAA, or
-  neon-for-agent-platforms.
+  Build and operate multi-tenant AI agent platforms on Neon. Use this skill
+  whenever the user is designing an agent/app builder, provisioning a Neon
+  project or database per user/app/agent run, managing thousands of tenant
+  projects, separating sponsored free users from paid customers, moving projects
+  between orgs, choosing personal vs organization vs project-scoped API keys,
+  tracking fleet consumption or Agent Plan costs, creating compound checkpoints
+  that combine DB snapshots with source revisions/secrets/deploy metadata, or
+  orchestrating snapshot/restore flows for generated apps. Also use it for Neon
+  Agent Program, Agent Plan, org/project limits, HIPAA, co-marketing, support, or
+  neondatabase/neon-for-agent-platforms examples.
 license: Apache-2.0
 ---
 
@@ -42,7 +42,6 @@ question involves:
 
 ```bash
 npx skills add neondatabase/agent-skills -s neon-postgres
-npx skills add neondatabase/neon-for-agent-platforms -s neon-postgres-agent-platforms
 ```
 
 ## Assistants: what you can do after install
@@ -52,11 +51,9 @@ platform-level Neon work: dual-org layout, provisioning a project for a new
 tenant, compound checkpoints, org-wide consumption polling, and
 transfer/upgrade flows—without the user pasting long documentation.
 
-**Where runnable examples live:** TypeScript samples run from `**scripts/`** at
-the [repo root](https://github.com/neondatabase/neon-for-agent-platforms/tree/main/scripts)
-(`package.json`, `npm run …`). This skill’s `**references/**` directory
-mirrors those files as **symlinks** beside markdown guides so you can read
-source next to docs;
+**Where runnable examples live:** TypeScript samples run from this skill’s [`scripts/`](https://github.com/neondatabase/neon-for-agent-platforms/tree/main/skills/neon-postgres-agent-platforms/scripts)
+directory (`package.json`, `npm run …`). The `**references/**` directory
+keeps markdown guides beside the runnable examples;
 [MANAGEMENT_API_SAMPLES.md](https://github.com/neondatabase/neon-for-agent-platforms/blob/main/skills/neon-postgres-agent-platforms/references/MANAGEMENT_API_SAMPLES.md)
 is the script catalog and env map. The human **Quick start** is the root
 [README](https://github.com/neondatabase/neon-for-agent-platforms/blob/main/README.md#quick-start).
@@ -71,7 +68,7 @@ metadata. Do not equate "checkpoint" with "Neon branch" alone. See the
 [compound checkpoints doc](https://github.com/neondatabase/neon-for-agent-platforms/blob/main/skills/neon-postgres-agent-platforms/references/COMPOUND_CHECKPOINTS_FOR_AGENT_PLATFORMS.md).
 - **Cross-org transfer** needs a **personal** API key (org keys only work
 inside one org). Projects with **GitHub or Vercel** integrations in Neon **cannot
-be transferred**; the API returns **422** ([Transfer projects](https://neon.com/docs/manage/orgs-project-transfer)).
+be transferred**; the API returns **422** ([Transfer projects](https://neon.com/docs/manage/orgs-project-transfer.md)).
 - **After a finalized snapshot restore**, the active branch ID changes. Poll
 operations to completion before reconnecting. Delete orphaned `(old)` branches
 to avoid storage cost.
@@ -79,12 +76,12 @@ to avoid storage cost.
 `GET /api/v2/consumption_history/v2/projects` over legacy consumption
 endpoints. **`GET /api/v2/consumption_history/account`** is deprecated with a
 planned sunset of **2026-06-01**; migrate to the v2 **per-project** endpoint
-([legacy consumption guide](https://neon.com/docs/guides/consumption-metrics-legacy)).
+([legacy consumption guide](https://neon.com/docs/guides/consumption-metrics-legacy.md)).
 - **V2 `metrics` parameter values** (for implementers): `compute_unit_seconds`,
 `root_branch_bytes_month`, `child_branch_bytes_month`,
 `instant_restore_bytes_month`, `snapshot_storage_bytes_month`,
 `public_network_transfer_bytes`, `private_network_transfer_bytes`,
-`extra_branches_month` ([consumption metrics](https://neon.com/docs/guides/consumption-metrics#required-parameters)).
+`extra_branches_month` ([consumption metrics](https://neon.com/docs/guides/consumption-metrics.md#required-parameters)).
 - **Snapshot schedules** are not provided on Agent Plan. Partners implement via
 snapshot API + their own scheduler.
 - **Rates and caps:** never invent dollar amounts or limits. Confirm on live
@@ -104,19 +101,19 @@ Partners run **two Neon organizations**:
 Key points:
 
 - Dollar rates, credits, and project caps come only from the live
-[Agent Plan](https://neon.com/docs/introduction/agent-plan) and
+[Agent Plan](https://neon.com/docs/introduction/agent-plan.md) and
 [neon.com/agents](https://neon.com/agents). Do not invent numbers.
 - **Organization API key:** automation inside one org (create project, set
 quotas).
 - **Personal API key:** required to transfer a project between orgs when a
 customer changes tier, then PATCH quotas to match the new tier.
-- **Project-scoped API key:** [member-level access](https://neon.com/docs/manage/api-keys#create-project-scoped-organization-api-keys) to **one** project only—narrower than an org key and useful for per-tenant runtime or automation that must not touch the rest of the org. Cannot create new projects org-wide; invalid if the project is transferred out of the org.
+- **Project-scoped API key:** [member-level access](https://neon.com/docs/manage/api-keys.md#create-project-scoped-organization-api-keys) to **one** project only—narrower than an org key and useful for per-tenant runtime or automation that must not touch the rest of the org. Cannot create new projects org-wide; invalid if the project is transferred out of the org.
 
 Links:
-[Agent Plan](https://neon.com/docs/introduction/agent-plan) ·
+[Agent Plan](https://neon.com/docs/introduction/agent-plan.md) ·
 [AI Agents](https://neon.com/use-cases/ai-agents) ·
-[Project transfer](https://neon.com/docs/manage/orgs-project-transfer) ·
-[AI Agent integration](https://neon.com/docs/guides/ai-agent-integration)
+[Project transfer](https://neon.com/docs/manage/orgs-project-transfer.md) ·
+[AI Agent integration](https://neon.com/docs/guides/ai-agent-integration.md)
 
 ## HIPAA
 
@@ -126,7 +123,7 @@ Neon's published HIPAA program (workflows, agreements, configuration).
 contact**.
 - This skill is not legal advice.
 
-Link: [HIPAA on Neon](https://neon.com/docs/security/hipaa)
+Link: [HIPAA on Neon](https://neon.com/docs/security/hipaa.md)
 
 ## Fleet shape: project-per-tenant
 
@@ -157,7 +154,7 @@ boundaries; when that applies, read **Isolation beyond branches (project and org
 edge cases)** next.
 
 Link:
-[AI Agent integration guide](https://neon.com/docs/guides/ai-agent-integration)
+[AI Agent integration guide](https://neon.com/docs/guides/ai-agent-integration.md)
 
 ## Isolation beyond branches (project and org edge cases)
 
@@ -198,7 +195,7 @@ do not invent caps.
 - **Organization API keys are scoped to one org.** Cross-org moves use a
 **personal** API key and project transfer, as in **Gotchas**—do not assume an
 org key can operate across orgs. **Project-scoped** keys are further limited to a
-single project ([API keys](https://neon.com/docs/manage/api-keys)).
+single project ([API keys](https://neon.com/docs/manage/api-keys.md)).
 
 **Embedding hygiene:**
 
@@ -217,7 +214,7 @@ stay consistent.
 
 For snapshot semantics, active-branch patterns, and restore tutorials, defer to
 `**neon-postgres`** and
-[AI database versioning](https://neon.com/docs/ai/ai-database-versioning).
+[AI database versioning](https://neon.com/docs/ai/ai-database-versioning.md).
 Here, emphasize tenant fleets:
 
 - Persist snapshot and branch IDs per tenant in your ledger. Tie each to
@@ -227,7 +224,7 @@ non-Neon state via
 accumulate. Automate cleanup and update stored IDs.
 - Poll operations to completion before reconnecting tenant apps.
 - Product semantics (snapshot counts per tier, Beta pricing dates) change.
-Confirm on [Agent Plan](https://neon.com/docs/introduction/agent-plan) docs.
+Confirm on [Agent Plan](https://neon.com/docs/introduction/agent-plan.md) docs.
 
 Typical platform-level checkpoint triggers:
 
@@ -236,8 +233,8 @@ Typical platform-level checkpoint triggers:
 - Before destructive migrations or customer-visible restore actions
 
 Links:
-[AI database versioning](https://neon.com/docs/ai/ai-database-versioning) ·
-[Backup and restore](https://neon.com/docs/guides/backup-restore) ·
+[AI database versioning](https://neon.com/docs/ai/ai-database-versioning.md) ·
+[Backup and restore](https://neon.com/docs/guides/backup-restore.md) ·
 [Snapshots-as-checkpoints demo](https://github.com/neondatabase-labs/snapshots-as-checkpoints-demo)
 
 ## Sandbox and preview databases
@@ -255,17 +252,17 @@ garbage-collect idle previews.
 compound checkpoints.
 
 Link:
-[AI Agent integration guide](https://neon.com/docs/guides/ai-agent-integration)
+[AI Agent integration guide](https://neon.com/docs/guides/ai-agent-integration.md)
 
 ## Cost, consumption, and entitlements
 
 - **Never invent** pricing, quotas, or limits. Confirm on
-[Agent Plan](https://neon.com/docs/introduction/agent-plan) and
-[consumption metrics](https://neon.com/docs/guides/consumption-metrics).
+[Agent Plan](https://neon.com/docs/introduction/agent-plan.md) and
+[consumption metrics](https://neon.com/docs/guides/consumption-metrics.md).
 - Use `GET /api/v2/consumption_history/v2/projects` for billing-aligned fields.
 Legacy endpoints differ. **`GET /api/v2/consumption_history/account`** is
 deprecated (sunset **2026-06-01**); use v2 per-project metrics instead
-([legacy guide](https://neon.com/docs/guides/consumption-metrics-legacy)).
+([legacy guide](https://neon.com/docs/guides/consumption-metrics-legacy.md)).
 - V2 `metrics` query strings are exactly: `compute_unit_seconds`,
 `root_branch_bytes_month`, `child_branch_bytes_month`,
 `instant_restore_bytes_month`, `snapshot_storage_bytes_month`,
@@ -274,21 +271,21 @@ deprecated (sunset **2026-06-01**); use v2 per-project metrics instead
 - Poll consumption roughly every 15 minutes. Polling does not wake suspended
 computes.
 - Run `auth-users.ts meta` from
-[scripts/](https://github.com/neondatabase/neon-for-agent-platforms/tree/main/scripts)
+[scripts/](https://github.com/neondatabase/neon-for-agent-platforms/tree/main/skills/neon-postgres-agent-platforms/scripts)
 for a routing map (Neon Auth REST vs Postgres roles vs consumption APIs).
 
 Links:
-[Agent Plan](https://neon.com/docs/introduction/agent-plan) ·
-[Consumption metrics](https://neon.com/docs/guides/consumption-metrics) ·
-[Consumption limits](https://neon.com/docs/guides/consumption-limits) ·
-[Cost optimization](https://neon.com/docs/introduction/cost-optimization) ·
-[Plans](https://neon.com/docs/introduction/plans)
+[Agent Plan](https://neon.com/docs/introduction/agent-plan.md) ·
+[Consumption metrics](https://neon.com/docs/guides/consumption-metrics.md) ·
+[Consumption limits](https://neon.com/docs/guides/consumption-limits.md) ·
+[Cost optimization](https://neon.com/docs/introduction/cost-optimization.md) ·
+[Plans](https://neon.com/docs/introduction/plans.md)
 
 ## Organization and project limit increases
 
 - Current defaults and ceilings are on
-[Agent Plan](https://neon.com/docs/introduction/agent-plan) and
-[AI Agent integration](https://neon.com/docs/guides/ai-agent-integration).
+[Agent Plan](https://neon.com/docs/introduction/agent-plan.md) and
+[AI Agent integration](https://neon.com/docs/guides/ai-agent-integration.md).
 Do not invent limits.
 - For project increase requests, email
 [agents@neon.tech](mailto:agents@neon.tech) with org ID(s), growth context,
@@ -302,7 +299,7 @@ studies, landing page features.
 - Reach out via shared Slack or your Neon representative with context on what
 you're building.
 
-Link: [Agent Plan](https://neon.com/docs/introduction/agent-plan)
+Link: [Agent Plan](https://neon.com/docs/introduction/agent-plan.md)
 
 ## Support
 
@@ -336,6 +333,6 @@ Runnable Management API automation from
 [SCRIPT-OVERVIEW.md](https://github.com/neondatabase/neon-for-agent-platforms/blob/main/skills/neon-postgres-agent-platforms/references/SCRIPT-OVERVIEW.md)
 
 All scripts use `@neondatabase/api-client` only. Shared
-[utils.ts](https://github.com/neondatabase/neon-for-agent-platforms/blob/main/scripts/utils.ts)
+[utils.ts](https://github.com/neondatabase/neon-for-agent-platforms/blob/main/skills/neon-postgres-agent-platforms/scripts/utils.ts)
 polls async operations. For SQL access from app code (drivers, pooling, ORMs),
 use `**neon-postgres`**.

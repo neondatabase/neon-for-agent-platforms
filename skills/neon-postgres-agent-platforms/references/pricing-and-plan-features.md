@@ -5,7 +5,7 @@ Read this file when the user needs **line-item rates**, **quota numbers**, the *
 ## Disclaimer (read first)
 
 - Everything below with **dollar amounts**, **per-unit rates**, **included gigabytes**, **project or branch caps**, **credit ceilings**, **Beta or GA dates** (for example snapshot storage), and **feature limits** is a **convenience snapshot** transcribed from Neon’s public docs.
-- Neon updates **[Agent Plan](https://neon.com/docs/introduction/agent-plan)**, **[Plans](https://neon.com/docs/introduction/plans)**, **[consumption metrics](https://neon.com/docs/guides/consumption-metrics)**, and related pages **without** this repository changing. **Treat neon.com as the only source of truth** for anything you put in a contract, invoice, support reply, or customer-facing UI.
+- Neon updates **[Agent Plan](https://neon.com/docs/introduction/agent-plan.md)**, **[Plans](https://neon.com/docs/introduction/plans.md)**, **[consumption metrics](https://neon.com/docs/guides/consumption-metrics.md)**, and related pages **without** this repository changing. **Treat neon.com as the only source of truth** for anything you put in a contract, invoice, support reply, or customer-facing UI.
 - Last intentional alignment with those pages: **April 2026**. Before you **quote externally** (blog, deck, ticket, social), open the live links in this file and **copy numbers from there**, not from this markdown alone.
 
 ---
@@ -16,7 +16,7 @@ Use when a partner asks about **pricing**, **cost optimization**, or **consumpti
 
 ### Pricing (paid org only; free org is $0)
 
-*Illustrative line items from Neon’s public pricing as of the snapshot above; confirm on **[Agent Plan](https://neon.com/docs/introduction/agent-plan)** and **[Plans](https://neon.com/docs/introduction/plans)** before relying on them.*
+*Illustrative line items from Neon’s public pricing as of the snapshot above; confirm on **[Agent Plan](https://neon.com/docs/introduction/agent-plan.md)** and **[Plans](https://neon.com/docs/introduction/plans.md)** before relying on them.*
 
 - **Compute**: $0.106/CU-hour (roughly half of standard Scale pricing at $0.222)
 - **Storage**: $0.35/GB-month
@@ -36,7 +36,7 @@ Use when a partner asks about **pricing**, **cost optimization**, or **consumpti
 
 ### Consumption tracking
 
-- On **usage-based plans** (Launch, Scale, Agent, Enterprise), use `GET /api/v2/consumption_history/v2/projects` for metrics that match billing. **`GET /api/v2/consumption_history/account`** is deprecated with a planned sunset of **2026-06-01**; migrate to v2 per-project metrics ([consumption metrics](https://neon.com/docs/guides/consumption-metrics), [legacy notice](https://neon.com/docs/guides/consumption-metrics-legacy)). Legacy endpoints return different fields; see Neon’s consumption docs.
+- On **usage-based plans** (Launch, Scale, Agent, Enterprise), use `GET /api/v2/consumption_history/v2/projects` for metrics that match billing. **`GET /api/v2/consumption_history/account`** is deprecated with a planned sunset of **2026-06-01**; migrate to v2 per-project metrics ([consumption metrics](https://neon.com/docs/guides/consumption-metrics.md), [legacy notice](https://neon.com/docs/guides/consumption-metrics-legacy.md)). Legacy endpoints return different fields; see Neon’s consumption docs.
 - **V2 `metrics` values** (exact strings for the API and for `CONSUMPTION_METRICS` in samples): `compute_unit_seconds`, `root_branch_bytes_month`, `child_branch_bytes_month`, `instant_restore_bytes_month`, `snapshot_storage_bytes_month`, `public_network_transfer_bytes`, `private_network_transfer_bytes`, `extra_branches_month`.
 - Poll about every **15 minutes** (Neon’s update cadence). Polling does **not** wake suspended computes.
 - Alert users at **80%** and **95%** of their quota to prevent unexpected suspension.
@@ -48,7 +48,7 @@ Use when a partner asks about **pricing**, **cost optimization**, or **consumpti
 
 ## Agent Plan features summary
 
-Use when a partner asks **what's included** in the Agent Plan. **Do not invent numbers.** The bullets below mirror Neon’s Agent Plan / Plans documentation as of **April 2026**; caps, windows, and included quantities **change**—always confirm on **[Agent Plan](https://neon.com/docs/introduction/agent-plan)** (and linked pages) before quoting outside this repo.
+Use when a partner asks **what's included** in the Agent Plan. **Do not invent numbers.** The bullets below mirror Neon’s Agent Plan / Plans documentation as of **April 2026**; caps, windows, and included quantities **change**—always confirm on **[Agent Plan](https://neon.com/docs/introduction/agent-plan.md)** (and linked pages) before quoting outside this repo.
 
 ### Database and compute
 
