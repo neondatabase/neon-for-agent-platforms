@@ -2,16 +2,16 @@
 
 name: neon-postgres-agent-platforms
 description: >-
-  Multi-tenant AI agent platforms on Neon: provisioning many projects/databases
-  per user, dual orgs (sponsored free + paid), personal vs organization vs
-  project-scoped API keys, project transfer, fleet provisioning, compound checkpoints (DB + revision + secrets +
-  deploy metadata), snapshot/restore orchestration for tenants, consumption v2,
-  cost isolation, Agent Plan rates, co-marketing, support, and
-  neondatabase/neon-for-agent-platforms examples. Required companion to
-  neon-postgres (install that first). Use when users mention Neon Agent Program,
-  Agent Plan, fleet, transfer, provisioned databases per agent run, checkpoints,
-  database versioning at platform scale, pricing, org limits, HIPAA, or
-  neon-for-agent-platforms.
+  Build and operate multi-tenant AI agent platforms on Neon. Use this skill
+  whenever the user is designing an agent/app builder, provisioning a Neon
+  project or database per user/app/agent run, managing thousands of tenant
+  projects, separating sponsored free users from paid customers, moving projects
+  between orgs, choosing personal vs organization vs project-scoped API keys,
+  tracking fleet consumption or Agent Plan costs, creating compound checkpoints
+  that combine DB snapshots with source revisions/secrets/deploy metadata, or
+  orchestrating snapshot/restore flows for generated apps. Also use it for Neon
+  Agent Program, Agent Plan, org/project limits, HIPAA, co-marketing, support, or
+  neondatabase/neon-for-agent-platforms examples.
 license: Apache-2.0
 ---
 
