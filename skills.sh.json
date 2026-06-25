@@ -1,0 +1,11 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Agent Platforms",
+      "description": "Skills for platforms that provision and operate Neon Postgres for users.",
+      "skills": ["neon-postgres-agent-platforms"]
+    }
+  ]
+}
