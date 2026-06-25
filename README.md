@@ -20,9 +20,19 @@ Official Neon docs:
 
 ---
 
+## Available Skills
+
+### Neon Postgres Agent Platforms
+
+[![neon-postgres-agent-platforms](https://shieldcn.dev/skills/installs/neondatabase/neon-for-agent-platforms/neon-postgres-agent-platforms.svg?variant=branded&size=xs&label=neon-postgres-agent-platforms)](https://skills.sh/neondatabase/neon-for-agent-platforms/neon-postgres-agent-platforms)
+
+Guidance for agent platforms that provision and operate Neon Postgres at scale.
+
+---
+
 ## Quick start
 
-### Install skills
+### Install
 
 ```bash
 npx skills add neondatabase/agent-skills -s neon-postgres
