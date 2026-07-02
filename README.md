@@ -101,7 +101,7 @@ neon-for-agent-platforms/
 
 | Path                                    | Purpose                                                      |
 | --------------------------------------- | ------------------------------------------------------------ |
-| `scripts/`                              | Runnable `@neondatabase/api-client` samples                  |
+| `scripts/`                              | Runnable `@neon/sdk` samples                  |
 | `skills/neon-postgres-agent-platforms/` | Companion agent skill, reference docs, and symlinked sources |
 
 
