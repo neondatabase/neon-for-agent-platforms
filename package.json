@@ -1,0 +1,18 @@
+{
+  "name": "@neondatabase/neon-for-agent-platforms",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Neon Agent Program examples and companion Agent Skills",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neondatabase/neon-for-agent-platforms"
+  },
+  "keywords": ["neon", "postgres", "agent-skills", "ai-agents"],
+  "scripts": {
+    "validate:skills": "node scripts/validate-skills.mjs"
+  },
+  "devDependencies": {
+    "skills-ref": "0.1.5"
+  }
+}
