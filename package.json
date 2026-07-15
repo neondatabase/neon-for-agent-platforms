@@ -10,7 +10,8 @@
   },
   "keywords": ["neon", "postgres", "agent-skills", "ai-agents"],
   "scripts": {
-    "validate:skills": "node scripts/validate-skills.mjs"
+    "validate:skills": "node scripts/validate-skills.mjs",
+    "validate:ci": "npm run validate:skills"
   },
   "devDependencies": {
     "skills-ref": "0.1.5"
