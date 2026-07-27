@@ -44,7 +44,7 @@ Shared pipeline shape (both repos):
 - Workflow: `.github/workflows/validate.yml` (job name **Validate**)
 - Install: `npm ci --ignore-scripts` from `package-lock.json`
 - Entry point: `npm run validate:ci`
-- Supply chain: SHA-pinned GitHub Actions, `harden-runner` egress audit, Dependabot for `github-actions` + `npm`
+- Supply chain: SHA-pinned GitHub Actions, exact-pinned npm dependencies (`save-exact=true` in `.npmrc`, no ranges and no unpinned `npx`), `package-lock.json` resolving from `registry.npmjs.org`, `harden-runner` egress audit, Dependabot for `github-actions` + `npm`
 
 **Repo-specific:** this repo has no `plugins/`, so `validate:ci` is skills-only. The `agent-skills` repo additionally validates Cursor/Claude plugin manifests (`validate:plugins`) and filters on `plugins/**` — that's an intentional difference to preserve, not drift to "fix".
 
