@@ -4,7 +4,7 @@
   "groupings": [
     {
       "title": "Agent Platforms",
-      "description": "Skills for platforms that provision and operate Neon Postgres for users.",
+      "description": "Skills for platforms that provision and operate Lakebase Postgres for users.",
       "skills": ["neon-postgres-agent-platforms"]
     }
   ]

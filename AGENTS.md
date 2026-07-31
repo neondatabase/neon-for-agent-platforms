@@ -6,7 +6,7 @@ For the Agent Skills specification and general skill-authoring patterns, see [ne
 
 ## Repository Overview
 
-Sample code and a companion Agent Skill for the [Neon AI Agent Program](https://neon.com/docs/introduction/agent-plan) — targeting platforms that provision and operate Neon Postgres for their users (agent platforms, codegen tools, multi-tenant SaaS).
+Sample code and a companion Agent Skill for the [Neon AI Agent Program](https://neon.com/docs/introduction/agent-plan) — targeting platforms that provision and operate Lakebase Postgres for their users (agent platforms, codegen tools, multi-tenant SaaS).
 
 | Path | Purpose |
 | --- | --- |
@@ -14,6 +14,18 @@ Sample code and a companion Agent Skill for the [Neon AI Agent Program](https://
 | `skills/neon-postgres-agent-platforms/scripts/` | Runnable `@neon/sdk` TypeScript samples (separate `package.json`) |
 
 For connection strings, drivers, ORMs, and general Neon app integration, use the [neon-postgres skill](https://github.com/neondatabase/agent-skills) and [Neon docs](https://neon.com/docs) first.
+
+## Terminology
+
+Public-facing copy in this repo follows the Neon naming rules, which match [neondatabase/agent-skills](https://github.com/neondatabase/agent-skills) (`AGENTS.md`):
+
+- **Lakebase Postgres** is the database product. Don't call it "Neon Postgres", "Neon Serverless Postgres", or "Neon" — it is the same database whether reached through Neon or through Databricks.
+- **lakebase architecture** (lowercase) is the category: OLTP built directly on cloud object storage, storage decoupled from compute. It replaces "the Neon architecture".
+- **Neon** is the brand and the access path, and brand-scope copy uses it alone. Never "Neon and Lakebase Postgres" — that coordinates the brand with one of its own components.
+
+"Platform" needs care in this repo specifically, because it appears constantly and is usually correct: **agent platforms**, a partner's own platform, and the Databricks Platform are all fine. Neon itself is never a platform — it is not separate from the Databricks Platform, so "the Neon platform" cannot be used.
+
+Skill ids, `neon-postgres` cross-references, and Neon API resource names (a **Neon project**, a **Neon org**) are identifiers and stay as they are.
 
 ## Validation
 
