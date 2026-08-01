@@ -1,7 +1,8 @@
 # Neon for Agent Platforms
 
 Sample code and a companion Agent Skill for the Neon AI Agent Program,
-targeting products that provision and operate Lakebase Postgres for their users
+targeting products that provision and operate Lakebase Postgres, Object Storage,
+Functions, Managed Better Auth, and/or AI Gateway access for their users
 (agent platforms, codegen tools, multi-tenant SaaS).
 
 **Scope:**

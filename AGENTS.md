@@ -6,7 +6,7 @@ For the Agent Skills specification and general skill-authoring patterns, see [ne
 
 ## Repository Overview
 
-Sample code and a companion Agent Skill for the [Neon AI Agent Program](https://neon.com/docs/introduction/agent-plan) — targeting platforms that provision and operate Lakebase Postgres for their users (agent platforms, codegen tools, multi-tenant SaaS).
+Sample code and a companion Agent Skill for the [Neon AI Agent Program](https://neon.com/docs/introduction/agent-plan) — targeting platforms that provision and operate Lakebase Postgres, Object Storage, Functions, Managed Better Auth, and/or AI Gateway access for their users (agent platforms, codegen tools, multi-tenant SaaS).
 
 | Path | Purpose |
 | --- | --- |
