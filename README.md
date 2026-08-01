@@ -27,7 +27,7 @@ Official Neon docs:
 
 [![neon-postgres-agent-platforms](https://shieldcn.dev/skills/installs/neondatabase/neon-for-agent-platforms/neon-postgres-agent-platforms.svg?variant=branded&size=xs&label=neon-postgres-agent-platforms)](https://skills.sh/neondatabase/neon-for-agent-platforms/neon-postgres-agent-platforms)
 
-Guidance for agent platforms that provision and operate Lakebase Postgres at scale.
+Guidance for agent platforms that provision and operate Lakebase Postgres on Neon at scale.
 
 ---
 
