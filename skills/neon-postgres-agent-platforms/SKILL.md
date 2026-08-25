@@ -82,9 +82,9 @@ attach compute and return a connection string. Waiting is what the write tools
 already do. Generated schemas are strict: a newly added API field is rejected
 until you upgrade `@neon/tools`, or call `@neon/sdk` directly.
 
-Selectors are SDK paths (`projects.list`). The published tool id is verb-first
-(`list_projects`). `toolIds` lists every selector. MCP 2.x uses
-`@neon/tools/mcp`; MCP 1.x uses `@neon/tools/mcp-v1`.
+Selectors are SDK paths (`projects.list`). Call `publishedId` for the
+model-facing id (`projects.list` → `list_projects`). `toolIds` lists every
+selector. MCP 2.x uses `@neon/tools/mcp`; MCP 1.x uses `@neon/tools/mcp-v1`.
 
 ```ts
 import { McpServer } from "@modelcontextprotocol/server";
@@ -106,6 +106,10 @@ const tools = createNeonTools({
 const server = new McpServer({ name: "neon", version: "1.0.0" });
 registerNeonTools(server, tools);
 ```
+
+`apiKey` accepts a function so a short-lived token can be refreshed per
+request. A remote MCP server that already authenticated the client can omit
+`apiKey` at construction; `registerNeonTools` then sends `authInfo.token`.
 
 MCP annotations are advisory. Hosts using `@neon/tools/mcp` must read
 `neon/requiresApproval` in MCP `_meta` and enforce their own approval policy
