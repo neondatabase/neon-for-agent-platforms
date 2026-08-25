@@ -225,7 +225,7 @@ node --env-file=.env dist/scripts/auth-users.js meta
 
 ## Shared helpers
 
-[`scripts/utils.ts`](../scripts/utils.ts) holds **shared helpers** on top of the same **`@neon/sdk`** surface: a configured client factory (`neonClient` — `throwOnError` + `waitForReadiness`) and default-branch resolution (`getProductionBranchId`). The SDK itself handles **readiness polling**, retries, and typed errors, so the scripts no longer hand-roll an operation poller. These scripts do not use `@neon/tools`; that package is for agent-facing tools, covered in [SDK vs agent tools](../SKILL.md#sdk-vs-agent-tools).
+[`scripts/utils.ts`](../scripts/utils.ts) holds **shared helpers** on top of the same **`@neon/sdk`** surface: a configured client factory (`neonClient` — `throwOnError` + `waitForReadiness`) and default-branch resolution (`getProductionBranchId`). The SDK itself handles **readiness polling**, retries, and typed errors, so the scripts no longer hand-roll an operation poller. These scripts do not use `@neon/tools`. See [SDK vs agent tools](../SKILL.md#sdk-vs-agent-tools).
 
 ---
 

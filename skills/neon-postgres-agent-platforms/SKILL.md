@@ -99,6 +99,11 @@ const server = new McpServer({ name: "neon", version: "1.0.0" });
 registerNeonTools(server, tools);
 ```
 
+MCP annotations are advisory. Hosts must read `neon/requiresApproval` in MCP
+`_meta` and enforce their own approval policy before execution. Every non-read
+operation is marked as requiring approval, as are reads that return connection
+credentials.
+
 Select only the methods each agent needs. For a tenant-scoped agent, inject the
 path `project_id` so the model cannot pick another project on tools that take
 that path parameter:
