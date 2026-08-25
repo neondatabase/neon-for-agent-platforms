@@ -65,18 +65,26 @@ is the script catalog and env map. The human **Quick start** is the root
 
 Your control plane should call
 [`@neon/sdk`](https://www.npmjs.com/package/@neon/sdk). The sample scripts in
-this repo do. The [Neon MCP server](https://github.com/neondatabase/mcp-server-neon)
-is another instance: custom MCP tool handlers over `@neon/sdk`.
+this repo do.
+
+The [Neon MCP server](https://github.com/neondatabase/mcp-server-neon) is a
+custom agent-facing layer: MCP tool handlers written over `@neon/sdk`.
 
 Use [`@neon/tools`](https://www.npmjs.com/package/@neon/tools) when you want to
 give agents on your platform direct Neon management access without writing those
 handlers. It publishes generated wrappers for a selected set of SDK methods as
-agent tools, with adapters for MCP, Eve, and Mastra. Not every SDK method is a
-tool: `projects.create` and `branches.create` are omitted in favor of
-`projects.createAndConnect` and `branches.createWithCompute`.
+agent tools, with adapters for MCP, Eve, and Mastra.
 
-Selectors are SDK paths (`projects.list`). MCP 2.x uses `@neon/tools/mcp`; MCP
-1.x uses `@neon/tools/mcp-v1`.
+These public client methods are not tools: `projects.create`, `branches.create`,
+`operations.waitFor`, `postgres.roles.password`, and `storage.objects.get`. Use
+`projects.createAndConnect` and `branches.createWithCompute` for creates that
+attach compute and return a connection string. Waiting is what the write tools
+already do. Generated schemas are strict: a newly added API field is rejected
+until you upgrade `@neon/tools`, or call `@neon/sdk` directly.
+
+Selectors are SDK paths (`projects.list`). The published tool id is verb-first
+(`list_projects`). `toolIds` lists every selector. MCP 2.x uses
+`@neon/tools/mcp`; MCP 1.x uses `@neon/tools/mcp-v1`.
 
 ```ts
 import { McpServer } from "@modelcontextprotocol/server";
@@ -99,10 +107,11 @@ const server = new McpServer({ name: "neon", version: "1.0.0" });
 registerNeonTools(server, tools);
 ```
 
-MCP annotations are advisory. Hosts must read `neon/requiresApproval` in MCP
-`_meta` and enforce their own approval policy before execution. Every non-read
-operation is marked as requiring approval, as are reads that return connection
-credentials.
+MCP annotations are advisory. Hosts using `@neon/tools/mcp` must read
+`neon/requiresApproval` in MCP `_meta` and enforce their own approval policy
+before execution. The Eve and Mastra adapters map that flag to Eve's
+`approval` hook and Mastra's `requireApproval`. Every non-read operation is
+marked as requiring approval, as are reads that return connection credentials.
 
 Select only the methods each agent needs. For a tenant-scoped agent, inject the
 path `project_id` so the model cannot pick another project on tools that take
