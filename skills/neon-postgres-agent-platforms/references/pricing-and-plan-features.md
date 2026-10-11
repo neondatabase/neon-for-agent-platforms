@@ -23,7 +23,7 @@ Use when a partner asks about **pricing**, **cost optimization**, or **consumpti
 - **Instant restore (PITR)**: $0.20/GB-month for change history
 - **Snapshots**: $0.09/GB-month (after Beta, starting May 1, 2026)
 - **Extra branches**: $1.50/branch-month (beyond plan allowance)
-- **Public network transfer**: 100 GB included, then $0.10/GB
+- **Public network transfer**: 500 GB included, then $0.10/GB
 - **Initial credits**: up to **$25,000** for the paid org
 
 ### Cost optimization levers
