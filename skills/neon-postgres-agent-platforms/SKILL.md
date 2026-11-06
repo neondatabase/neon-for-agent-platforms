@@ -314,6 +314,10 @@ rejects lower values.
 Set it in `default_endpoint_settings` when you create the tenant project:
 
 ```ts
+import { createNeonClient } from "@neon/sdk";
+
+const neon = createNeonClient<true>({ apiKey, throwOnError: true });
+
 const { project } = await neon.projects.createAndConnect({
   name: `tenant-${tenantId}`,
   org_id: orgId,
@@ -340,8 +344,10 @@ Tradeoffs of keeping it on:
 
 - **Usage-based cost:** a suspended compute bills no compute time. An always-on
 compute bills around the clock, idle or not.
-- **Cold start:** the first query after a suspend waits a few hundred
-milliseconds while the compute wakes. Later queries are not affected.
+- **Cold start:** the first connection after a suspend waits while the compute
+wakes, generally a few hundred milliseconds and longer after more than 7 days
+idle. Postgres memory buffers start cold, so early queries can be slower until
+they warm.
 - **Session state resets** on suspend: temporary tables, prepared statements,
 and in-memory statistics are gone. Long-running servers that hold a connection
 pool must reconnect on error.
